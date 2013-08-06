@@ -1,5 +1,5 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.');
 
 return array(
-    "dir" => "plugins"
+    "dir" => "plugins" . DIRECTORY_SEPARATOR
 );
