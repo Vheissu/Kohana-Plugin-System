@@ -131,7 +131,7 @@ class Kohana_Plugins
 	 * @param mixed $function
 	 * @param mixed $priority
 	 */
-	public function add_action($name, $function, $priority=10)
+	public static function add_action($name, $function, $priority=10)
 	{
 		// If we have already registered this action return true
 		if ( isset(self::$actions[$name][$priority][$function]) )
@@ -168,7 +168,7 @@ class Kohana_Plugins
 	 * @param mixed $arguments
 	 * @return mixed
 	 */
-	public function do_action($name, $arguments = "")
+	public static function do_action($name, $arguments = "")
 	{
 		// Oh, no you didn't. Are you trying to run an action hook that doesn't exist?
 		if ( !isset(self::$actions[$name]) )
@@ -217,7 +217,7 @@ class Kohana_Plugins
 	 * @param mixed $function
 	 * @param mixed $priority
 	 */
-	public function remove_action($name, $function, $priority=10)
+	public static function remove_action($name, $function, $priority=10)
 	{
 		// If the action hook doesn't, just return true
 		if ( !isset(self::$actions[$name][$priority][$function]) )
@@ -236,7 +236,7 @@ class Kohana_Plugins
 	 *
 	 * @return Action
 	 */
-	public function current_action()
+	public static function current_action()
 	{
 		return self::$current_action;
 	}
@@ -249,7 +249,7 @@ class Kohana_Plugins
 	 * @param mixed $hook
 	 * @param mixed $priority
 	 */
-	public function has_run($action, $priority = 10)
+	public static function has_run($action, $priority = 10)
 	{
 		if ( isset(self::$actions[$action][$priority]) )
 		{
@@ -268,7 +268,7 @@ class Kohana_Plugins
 	 *
 	 * @param mixed $name
 	 */
-	public function action_exists($name)
+	public static function action_exists($name)
 	{
 		if ( isset(self::$actions[$name]) )
 		{
