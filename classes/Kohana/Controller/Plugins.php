@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class Controller_Plugins extends Controller {
+class Kohana_Controller_Plugins extends Controller {
 
 	protected $_tpl = null;
 
