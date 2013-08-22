@@ -81,6 +81,14 @@ abstract class Kohana_Plugin_Manager
 	abstract public function is_installed($plugin);
 
 	/**
+	 * Check if a plugin was activated.
+	 *
+	 * @param string $plugin Name of the plugin
+	 * @return bool
+	 */
+	abstract public function is_active($plugin);
+
+	/**
 	 * Initiate a plugin manager.
 	 *
 	 * @param string $type The name of the driver

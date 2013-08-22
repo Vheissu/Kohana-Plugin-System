@@ -125,7 +125,8 @@ class Kohana_Plug {
 	 */
 	public static function first($event, $parameters = array())
 	{
-		return reset(static::fire($event, $parameters));
+		$results = static::fire($event, $parameters);
+		return reset($results);
 	}
 
 	/**

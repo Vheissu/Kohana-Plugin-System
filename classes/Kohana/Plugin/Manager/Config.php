@@ -15,10 +15,17 @@ class Kohana_Plugin_Manager_Config extends Plugin_Manager
 		//configure the config reader
 		$this->_inst->attach(new Kohana_Config_File_Reader($this->_config_path));
 
-		// We'll be storing the config in APPPATH, make sure the folder exists there
+		// We'll be storing the config in APPPATH, make sure the folder and required config files exist exists there
 		if(!file_exists(APPPATH.$this->_config_path))
 		{
 			mkdir(APPPATH.$this->_config_path);
+			$config_tpl = "<?php defined('SYSPATH') OR die('No direct access allowed.');
+
+return array(
+
+);";
+			file_put_contents(APPPATH.$this->_config_path.DIRECTORY_SEPARATOR.'active.php', $config_tpl);
+			file_put_contents(APPPATH.$this->_config_path.DIRECTORY_SEPARATOR.'list.php', $config_tpl);
 		}
 	}
 
@@ -47,7 +54,7 @@ class Kohana_Plugin_Manager_Config extends Plugin_Manager
 			$activated_plugins = $this->_inst->load('active');
 
 			//see if it's already in there
-			if(!in_array($plugin, $activated_plugins))
+			if(!in_array($plugin, $activated_plugins->as_array()))
 			{
 				//add the plugin
 				$activated_plugins[] = $plugin;
@@ -182,5 +189,10 @@ class Kohana_Plugin_Manager_Config extends Plugin_Manager
 		}
 
 		return false;
+	}
+
+	public function is_active($plugin)
+	{
+		return in_array($plugin, $this->get_active());
 	}
 }

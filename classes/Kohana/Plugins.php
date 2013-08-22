@@ -27,7 +27,7 @@ class Kohana_Plugins
 		return $instance;
 	}
 
-	
+
 	public function __construct($params = array())
 	{
 		$config = Kohana::$config->load('plugins');
@@ -70,14 +70,14 @@ class Kohana_Plugins
 					if ( $plugin->isDir() && !$plugin->isDot() )
 					{
 						// if there's no plugin.php in this folder, ignore it
-						if(!file_exists($plugin->getPath().DIRECTORY_SEPARATOR.'plugin.php'))
+						if(!file_exists($plugin->getPath().DIRECTORY_SEPARATOR.$directory->getBasename().DIRECTORY_SEPARATOR.'plugin.php'))
 						{
 							continue;
 						}
 
 						// Store plugin in our pool
 						self::$plugins_pool[ $plugin->getFilename() ]['plugin'] = ucfirst($plugin->getFilename());
-						self::$plugins_pool[ $plugin->getFilename() ]['path'] = $dir;
+						self::$plugins_pool[ $plugin->getFilename() ]['path'] = $plugin->getPath().DIRECTORY_SEPARATOR.$directory->getBasename();
 					}
 				}
 			}
@@ -95,12 +95,13 @@ class Kohana_Plugins
 	public function load_plugin($plugin) {
 		if(!isset(self::$plugins_pool[$plugin]['instance']))
 		{
-			$plugin_path = self::$plugins_pool[$plugin]['path'] . $plugin . DIRECTORY_SEPARATOR;
+			$plugin_path = self::$plugins_pool[$plugin]['path'].DIRECTORY_SEPARATOR;
 
 			// Include plugin config options
 			$config_file = $plugin_path . "config.php";
 			$config = (file_exists($config_file)) ? include_once $config_file : array();
 
+			require_once $plugin_path.'plugin.php';
 			$inst = new self::$plugins_pool[$plugin]['plugin']($plugin, $config);
 
 			if(!is_a($inst, 'Plugin'))
