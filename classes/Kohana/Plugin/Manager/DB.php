@@ -134,4 +134,9 @@ class Kohana_Plugin_Manager_DB extends Plugin_Manager
 
 		return false;
 	}
+
+	public function is_active($plugin)
+	{
+		return in_array($plugin, $this->get_active());
+	}
 }
