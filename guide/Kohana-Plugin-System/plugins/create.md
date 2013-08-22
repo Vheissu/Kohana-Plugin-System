@@ -34,7 +34,7 @@ Your plugin class requires to have a public init() method that's called when thi
 
 For example, the kmarkdown plugin has a vendor class bundled, which we would need included for our event to run:
 
-		public function init() {
+		protected function _init() {
 			include_once 'vendor/markdown.php';
 		}
 
