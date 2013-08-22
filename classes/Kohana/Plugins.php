@@ -9,11 +9,25 @@ class Kohana_Plugins
 	//Manage your plugins' status
 	public static $manager = null;
 
-	public static function factory($params = array())
+	/**
+	 * Get the Plugins instance
+	 *
+	 * @param array $params Any parameters you want to pass on the the constructor
+	 * @return Plugins
+	 */
+	public static function instance($params = array())
 	{
-		return new Plugins($params);
+		static $instance = null;
+
+		if($instance == null)
+		{
+			$instance = new Plugins($params);
+		}
+
+		return $instance;
 	}
 
+	
 	public function __construct($params = array())
 	{
 		$config = Kohana::$config->load('plugins');
@@ -114,7 +128,6 @@ class Kohana_Plugins
 			{
 				$plugin = $this->load_plugin($name);
 				$plugin->init();
-				$plugin->register_events();
 			}
 		}
 
@@ -132,8 +145,14 @@ class Kohana_Plugins
 		return ( isset(self::$plugins_pool[$name]) ) ? self::$plugins_pool[$name]['instance']->info : FALSE;
 	}
 
+	/**
+	 * Return the status of a plugin [name, installed, active]
+	 *
+	 * @param $name string Name of the plugin
+	 * @return null|array
+	 */
 	public function plugin_status($name)
 	{
-		return ( isset(self::$plugins_pool[$name]) ) ? self::$manager->get($name) : FALSE;
+		return ( isset(self::$plugins_pool[$name]) ) ? self::$manager->get($name) : NULL;
 	}
 }

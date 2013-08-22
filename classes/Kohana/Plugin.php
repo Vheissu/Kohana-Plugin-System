@@ -51,10 +51,10 @@ abstract class Kohana_Plugin
 	 * @return bool
 	 * @throws Kohana_Exception
 	 */
-	public function install() {
+	final public function install() {
 		if(Plugins::$manager->is_installed($this->_name))
 		{
-			throw new Kohana_Exception('The plugin ":plugin" is already installed.', array(':plugin' => $this->_name));
+			throw new Kohana_Exception('The plugin ":plugin" is already installed.', array(':plugin' => $this->info['name']));
 		}
 
 		if($this->_install() == true)
@@ -67,8 +67,10 @@ abstract class Kohana_Plugin
 
 	/**
 	 * Run when initialising the plugin when it's active.
+	 *
+	 * @return bool
 	 */
-	abstract public function init();
+	abstract protected function _init();
 
 	/**
 	 * Store the name of events you want registered with this plugin.
@@ -84,17 +86,28 @@ abstract class Kohana_Plugin
 	protected $_events = array();
 
 	/**
-	 * Register all events that were defined in $this->_events.
+	 * Initialise the plugin and register all events that were defined in $this->_events.
+	 *
+	 * @return Kohana_Plugin
+	 * @throws Kohana_Exception
 	 */
-	public function register_events() {
-		if(count($this->_events) > 0)
-		{
-			foreach($this->_events as $id => $event)
+	final public function init() {
+		if($this->_init() == true) {
+			if(count($this->_events) > 0)
 			{
-				$class_event = (Valid::digit($id)) ? str_replace('.', '_', $event) : $id;
+				foreach($this->_events as $id => $event)
+				{
+					$class_event = (Valid::digit($id)) ? str_replace('.', '_', $event) : $id;
 
-				Plug::listen($event, array($this, 'on_'.$class_event));
+					Plug::listen($event, array($this, 'on_'.$class_event));
+				}
 			}
+
+			return $this;
+		}
+		else
+		{
+			throw new Kohana_Exception('Failed to initialise the ":plugin" plugin', array(':plugin' => $this->info['name']));
 		}
 	}
 }

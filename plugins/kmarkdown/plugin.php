@@ -15,8 +15,9 @@ class Kmarkdown extends Plugin
 	/**
 	 * Run when initialising the plugin when it's active.
 	 */
-	public function init() {
+	protected function _init() {
 		include_once 'vendor/markdown.php';
+		return true;
 	}
 
 	protected $_events = array('parse.message');
