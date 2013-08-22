@@ -21,7 +21,7 @@ class Task_Plugins extends Minion_Task
 
 		switch($manager) {
 			case 'Config':
-				$config_path = APPPATH.'config'.DIRECTORY_SEPARATOR.Kohana::$config->load('plugins.dir');
+				$config_path = APPPATH.'config'.DIRECTORY_SEPARATOR.Kohana::$config->load('plugins.manager.Config.dir');
 				if(!file_exists($config_path))
 				{
 					Minion_CLI::write('Creating plugin config folder');
@@ -39,7 +39,7 @@ return array(
 			case 'DB':
 				$db = Database::instance(Kohana::$config->load('plugins.manager.DB.connection'));
 				Minion_CLI::write('Dumping SQL into database');
-				$db->query(null, "CREATE TABLE IF NOT EXISTS `plugins` (
+				$db->query(null, "CREATE TABLE IF NOT EXISTS `".Kohana::$config->load('plugins.manager.DB.table')."` (
 					  `id` int(11) NOT NULL AUTO_INCREMENT,
 					  `name` varchar(65) NOT NULL,
 					  `installed` tinyint(1) NOT NULL,
