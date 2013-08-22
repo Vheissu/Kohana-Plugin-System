@@ -33,6 +33,7 @@ class Kohana_Plugin_Manager_DB extends Plugin_Manager
 			->execute($this->_connection)
 			->get('plugin', 0);
 	}
+
 	public function activate($plugin)
 	{
 		if($this->_exists($plugin) == 0) {
@@ -79,8 +80,8 @@ class Kohana_Plugin_Manager_DB extends Plugin_Manager
 	{
 		if($this->_exists($plugin) == 0)
 		{
-			DB::insert($this->_table)
-				->values(array('name' => $plugin, 'installed' => $installed, 'active' => 0))
+			DB::insert($this->_table, array('name', 'installed', 'active'))
+				->values(array($plugin, $installed, 0))
 				->execute($this->_connection);
 
 			return true;
@@ -91,16 +92,17 @@ class Kohana_Plugin_Manager_DB extends Plugin_Manager
 
 	public function get($plugin)
 	{
-		return DB::select(array('name', 'installed', 'active'))
+		$result = DB::select('name', 'installed', 'active')
 			->from($this->_table)
 			->where('name', '=', $plugin)
 			->execute($this->_connection)
 			->as_array();
+		return $result[0];
 	}
 
 	public function get_all()
 	{
-		return DB::select(array('name', 'installed', 'active'))
+		return DB::select('name', 'installed', 'active')
 			->from($this->_table)
 			->execute($this->_connection)
 			->as_array();
@@ -111,7 +113,7 @@ class Kohana_Plugin_Manager_DB extends Plugin_Manager
 		if($this->_exists($plugin))
 		{
 			DB::update($this->_table)
-				->set(array('installed', '=', 1))
+				->set(array('installed' => 1))
 				->where('name', '=', $plugin)
 				->execute($this->_connection);
 
