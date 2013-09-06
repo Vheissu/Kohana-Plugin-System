@@ -1,4 +1,4 @@
-<? if(count($msg) > 0): ?>
+<?php if(count($msg) > 0): ?>
 <div class="row">
 	<div class="col-md-6 col-md-push-3">
 		<div class="alert alert-dismissable <?=$msg['class'];?>">
@@ -7,7 +7,7 @@
 		</div>
 	</div>
 </div>
-<? endif; ?>
+<?php endif; ?>
 <div class="row">
 	<div class="col-md-8 col-md-push-2">
 		<div class="panel panel-default">
@@ -25,29 +25,29 @@
 					</tr>
 				</thead>
 				<tbody>
-					<? foreach($list as $plugin):?>
+					<?php foreach($list as $plugin):?>
 						<tr>
 							<td><?=$plugin['info']['name'];?></td>
 							<td><a href="<?=$plugin['info']['author_URL'];?>" target="_blank"><?=$plugin['info']['author'];?></a></td>
 							<td><a href="#" class="tt" data-toggle="tooltip" title="<?=$plugin['info']['description'];?>"><i class="icon-info"></i></a></td>
 							<td class="text-center">
-								<? if($plugin['installed'] == true): ?>
+								<?php if($plugin['installed'] == true): ?>
 									<i class="icon-thumbs-up"> </i>
-								<? else: ?>
+								<?php else: ?>
 									<a href="<?=Route::url('plugins.install', array('plugin' => $plugin['name']));?>"><i class="icon-thumbs-down"></i></a>
-								<? endif; ?>
+								<?php endif; ?>
 							</td>
 							<td class="text-center">
-								<? if($plugin['active'] == true): ?>
+								<?php if($plugin['active'] == true): ?>
 								<a href="<?=Route::url('plugins.deactivate', array('plugin' => $plugin['name']));?>"><i class="icon-ok"> </i></a>
-								<? elseif($plugin['active'] == false && $plugin['installed'] == true): ?>
+								<?php elseif($plugin['active'] == false && $plugin['installed'] == true): ?>
 									<a href="<?=Route::url('plugins.activate', array('plugin' => $plugin['name']));?>"><i class="icon-remove"></i></a>
-								<? else: ?>
+								<?php else: ?>
 									<i class="icon-remove"></i>
-								<? endif; ?>
+								<?php endif; ?>
 							</td>
 						</tr>
-					<? endforeach; ?>
+					<?php endforeach; ?>
 				</tbody>
 			</table>
 		</div>
