@@ -39,7 +39,8 @@ return array(
 			case 'DB':
 				$db = Database::instance(Kohana::$config->load('plugins.manager.DB.connection'));
 				Minion_CLI::write('Dumping SQL into database');
-				$db->query(null, "CREATE TABLE IF NOT EXISTS `".Kohana::$config->load('plugins.manager.DB.table')."` (
+				$table = $db->quote_table(Kohana::$config->load('plugins.manager.DB.table'));
+				$db->query(null, "CREATE TABLE IF NOT EXISTS ".$table." (
 					  `id` int(11) NOT NULL AUTO_INCREMENT,
 					  `name` varchar(65) NOT NULL,
 					  `installed` tinyint(1) NOT NULL,
@@ -50,6 +51,6 @@ return array(
 				break;
 		}
 
-		Minion_CLI::write('Installation ' . Minion_CLI::color('completed', 'green') . 'for your '.$manager.' manager');
+		Minion_CLI::write('Installation ' . Minion_CLI::color('completed', 'green') . ' for your '.$manager.' manager');
 	}
 }
