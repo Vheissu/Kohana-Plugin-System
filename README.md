@@ -23,6 +23,8 @@ If you want to download this module through composer you'll have to add **vheiss
 
 If you want to store your plugins' state in config files you'll also have to add **happydemon/arr** to your package list.
 
+Next run ```composer update```
+
 ### Default
 
  -  [Download](https://github.com/Vheissu/Kohana-Plugin-System/archive/master.zip) the zip containing this module
