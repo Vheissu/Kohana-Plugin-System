@@ -10,21 +10,7 @@ At the moment this module exists of an event(hook) system (borrowed from Laravel
 ## Download
 
 ### Composer
-If you want to download this module through composer you'll have to add this repo's URL to your composer.json's
-repositories:
-
-```
-{
-"repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/Vheissu/Kohana-Plugin-System"
-        }
-    ]
-}
-```
-
-and after that add **vheissu/kohana-plugin-system** to your packages:
+If you want to download this module through composer you'll have to add **vheissu/kohana-plugin-system** to your packages:
 
 ```
 {
