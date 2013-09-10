@@ -1,0 +1,27 @@
+{
+	"name"       :"vheissu/kohana-plugin-system",
+	"type"       :"kohana-module",
+	"description":"A Kohana module makes it possible to manage and make use of plugins through events",
+	"keywords"   :["kohana", "plugins", "config", "database", "hooks", "events"],
+	"homepage"   :"https://github.com/Vheissu/Kohana-Plugin-System",
+	"license"    :"MIT",
+	"authors"    :[
+		{
+			"name"    :"Dwayne Charrington",
+			"homepage":"http://ilikekillnerds.com/",
+			"role"    :"Developer"
+		},
+		{
+			"name"    :"Maxim Kerstens",
+			"email"   :"maxim.kerstens@gmail.com",
+			"role"    :"Developer"
+		}
+	],
+	"require"    :{
+		"php"                   :">=5.3.0",
+		"composer/installers"   : "*"
+	},
+	"suggest": {
+		"happydemon/arr": "Required array helper when you want to store plugins' state in config files."
+	}
+}
