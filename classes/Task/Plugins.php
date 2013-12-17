@@ -1,13 +1,20 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 /**
- * Import data from the legacy system
+ * Import data structure to manage installed plugins.
  *
- * The import is destructive, the existing database will be truncated.
- *
- * @author Ando Roots <ando@sqroot.eu>
+ * @author happyDemon <maxim.kerstens@gmail.com>
  */
 class Task_Plugins extends Minion_Task
 {
+
+	protected $_options = array('manager' => 'db');
+
+	public function build_validation(Validation $validation)
+	{
+		return parent::build_validation($validation)
+			->rule('manager', 'in_array', array(':value', array('config', 'db')));
+	}
+
 	/**
 	 * Truncate local database and import everything from the remote
 	 *
@@ -17,10 +24,8 @@ class Task_Plugins extends Minion_Task
 	 */
 	protected function _execute(array $params)
 	{
-		$manager = Minion_CLI::read('Which manager do you want to install?', array('Config', 'DB'));
-
-		switch($manager) {
-			case 'Config':
+		switch($params['manager']) {
+			case 'config':
 				$config_path = APPPATH.'config'.DIRECTORY_SEPARATOR.Kohana::$config->load('plugins.manager.Config.dir');
 				if(!file_exists($config_path))
 				{
@@ -36,7 +41,7 @@ return array(
 					file_put_contents($config_path.DIRECTORY_SEPARATOR.'list.php', $config_tpl);
 				}
 				break;
-			case 'DB':
+			case 'db':
 				$db = Database::instance(Kohana::$config->load('plugins.manager.DB.connection'));
 				Minion_CLI::write('Dumping SQL into database');
 				$db->query(null, "CREATE TABLE IF NOT EXISTS `".Kohana::$config->load('plugins.manager.DB.table')."` (
@@ -50,6 +55,6 @@ return array(
 				break;
 		}
 
-		Minion_CLI::write('Installation ' . Minion_CLI::color('completed', 'green') . 'for your '.$manager.' manager');
+		Minion_CLI::write('Installation ' . Minion_CLI::color('completed', 'green') . 'for your '.$params['manager'].' manager');
 	}
 }
