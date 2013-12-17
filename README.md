@@ -39,9 +39,8 @@ you'll have to download [happyDemon/arr](https://github.com/happyDemon/arr) as w
 4. copy the config file stored in ```MODPATH.Kohana-Plugin-System/config/plugins.php``` to your ```APPPATH.config``` folder and change anything you want **(do not change manager.loader to DB yet, it will mess up your installation)**
 
 If you've downloaded happydemon/arr, don't forget to add it on your ```bootstrap.php``` as well.
-
-Open up your command line, *cd* into your app's folder and run: ```php minion plugins```, it will ask you which manager you want 
-to run the installation process for.
+ 
+Open up your command line, *cd* into your app's folder and run: ```php minion plugins``` (defaults to db) or ```php minion plugins --manager=db``` or ```php minion plugins --manager=config```, to start the installation process.
 
 Lastly change the manager.loader value (if needed) in your config file.
 
