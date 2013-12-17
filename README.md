@@ -5,16 +5,40 @@ This started out as fork of a library I wrote for Codeigniter that could be used
 
 At the moment this module exists of an event(hook) system (borrowed from Laravel 3 and renamed to Plug) and a plugin manager.
 
+
+
+## Download
+
+### Composer
+If you want to download this module through composer you'll have to add **vheissu/kohana-plugin-system** to your packages:
+
+```
+{
+  "require":
+  {
+    "vheissu/kohana-plugin-system": "1.*"
+  }
+}
+```
+
+If you want to store your plugins' state in config files you'll also have to add **happydemon/arr** to your package list.
+
+Next run ```composer update```
+
+### Default
+
+ -  [Download](https://github.com/Vheissu/Kohana-Plugin-System/archive/master.zip) the zip containing this module
+ -  Unpack it in your modules folder
+ 
+The same applies here as with composer, if you want to make store your plugins' state in config files instead of the database
+you'll have to download [happyDemon/arr](https://github.com/happyDemon/arr) as well.
+
 ## Installation
-1. [Download](https://github.com/Vheissu/Kohana-Plugin-System/archive/master.zip) the zip containing this module
-2. Unpack it in your modules folder
+
 3. Open up your ```bootstrap.php``` and enable the module:  ``` 'Kohana-Plugin-System' => MODPATH.'Kohana-Plugin-System'```
 4. copy the config file stored in ```MODPATH.Kohana-Plugin-System/config/plugins.php``` to your ```APPPATH.config``` folder and change anything you want **(do not change manager.loader to DB yet, it will mess up your installation)**
 
-Before going further with the installation you'll have to know that if you want to make use of the 
-config-based plugin manager you'll have to repeat the first 3 steps with 
-[happyDemon/arr](https://github.com/happyDemon/arr), which is used for saving config files. 
-This is not needed if you're going to be using the DB-based manager.
+If you've downloaded happydemon/arr, don't forget to add it on your ```bootstrap.php``` as well.
 
 Open up your command line, *cd* into your app's folder and run: ```php minion plugins```, it will ask you which manager you want 
 to run the installation process for.
