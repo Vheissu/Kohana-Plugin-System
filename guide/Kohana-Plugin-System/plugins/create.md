@@ -39,7 +39,7 @@ For example, the kmarkdown plugin has a vendor class bundled, which we would nee
 			return TRUE;
 		}
 
-If you don't have a need for one you'll just need to return true. If this returns anything lese than ```TRUE``` an exception will be thrown.
+If you don't have a need for one you'll just need to return true. If this returns anything else than ```TRUE``` an exception will be thrown.
 
 ## Registering events
 
