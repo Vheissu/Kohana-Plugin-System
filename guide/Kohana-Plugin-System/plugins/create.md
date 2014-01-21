@@ -36,9 +36,10 @@ For example, the kmarkdown plugin has a vendor class bundled, which we would nee
 
 		protected function _init() {
 			include_once 'vendor/markdown.php';
+			return TRUE;
 		}
 
-If you don't have a need for one, keep it empty. This method does not need to return anything.
+If you don't have a need for one you'll just need to return true. If this returns anything lese than ```TRUE``` an exception will be thrown.
 
 ## Registering events
 
