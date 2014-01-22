@@ -2,6 +2,7 @@
 
 return array(
     "dir" => "plugins" . DIRECTORY_SEPARATOR,
+    "load_routes" => TRUE,
 	"manager" => array(
 		"loader" => "Config", //Which manager will you use to load plugins (Config and DB are bundled)
 
