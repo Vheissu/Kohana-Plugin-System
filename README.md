@@ -42,9 +42,9 @@ If you've downloaded happydemon/arr, don't forget to add it on your ```bootstrap
  
 Open up your command line, *cd* into your app's folder and run: ```php minion plugins``` (defaults to db) or ```php minion plugins --manager=db``` or ```php minion plugins --manager=config```, to start the installation process.
 
-Lastly change the manager.loader value (if needed) in your config file.
+Now change the ```manager.loader``` value (if needed) in your config file.
 
-Alrighty, you've set everything up perfectly, we've bundled an examplary plugin manager which you can visit at ```http://{your app's url}/plugins```
+Alrighty, you've set everything up perfectly, we've bundled an **examplary plugin manager controller** which you can visit at ```http://{your app's url}/plugins```. This controller comes with no security, if you want to use it in a production environment you should create a controller called ```Controller_Plugins``` that extends ```Kohana_Controller_Plugins``` and do an auth/acl check in the ```before``` method.
 
 ## Documentation
 
